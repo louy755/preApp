@@ -1,0 +1,62 @@
+<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button><div class="container" style= 'background-color:  #b3e6ff'><br>
+  <div class="row">
+    <div class="col-sm">
+      <p>
+        <strong>Name:</strong>
+        <%= @person.name.titleize %>
+      </p>
+      
+      <p>
+        <strong>Phone:</strong>
+        <%= @person.phone %>
+      </p>
+      
+      <p>
+        <strong>Email:</strong>
+        <%= @person.email %>
+      </p>
+    </div>
+    <div class="col-sm">
+      
+        <p>
+          <strong>Address:</strong>
+          <%= @person.address.titleize %>
+        </p>
+        
+        <p>
+          <strong>Address2:</strong>
+          <%= @person.address2.titleize %>
+        </p>
+
+        <p>
+          <strong>City:</strong>
+          <%= @person.city.titleize %>
+        </p>
+
+        
+    
+    </div>
+    <div class="col-sm">
+      
+      <p>
+        <strong>State:</strong>
+        <%= @person.state.capitalize %>
+      </p>
+      
+      <p>
+        <strong>Zip:</strong>
+        <%= @person.zip %>
+      </p>
+
+      <p>
+        <strong>Sale Rep:</strong>
+        <%= @person.sale_rep %>
+      </p>
+      
+
+    </div>
+  </div><br>
+</div><br>
+
+<%= link_to 'Edit Customer Information Only!', edit_person_path(@person), :class => "btn btn-danger"  %>
+<%= link_to 'Back to All Invoices!', people_path, :class => "btn btn-outline-success"  %>
