@@ -10,40 +10,12 @@ require("channels")
 require('datatables.net-bs4')
 require("chartkick")
 require("chart.js")
+require("packs/people")
 
 import $ from 'jquery';
 global.$ = jQuery;
 
-$(document).ready(function() {
-  $('#per').DataTable();
-  $('#recs').DataTable();
-});
 
-
-$(document).ready(function() {
-  $(function() {
-    $('a#show_delivery').click(function(event){
-      event.preventDefault();
-      $('div#delivery').toggle();
-    });
-  });
-});
-$(document).ready(function() {
-  $(function() {
-    $('a#show_items').click(function(event){
-      event.preventDefault();
-      $('div#items').toggle();
-    });
-  });
-});
-$(document).ready(function() {
-  $(function() {
-    $('a#show_pays').click(function(event){
-      event.preventDefault();
-      $('div#pays').toggle();
-    });
-  });
-});
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
