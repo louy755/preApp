@@ -109,7 +109,7 @@ class InvoicePdf < Prawn::Document
     end
     def line_info_rows
       [["Name", "Phone", "Adress", 'Adress2', "city", "State", "Zip"]] +
-      [[@person.name, @person.phone, @person.address, @person.address2, @person.city, @person.state, @person.zip]]
+      [[@person.name.titleize, @person.phone, @person.address.titleize, @person.address2, @person.city.titleize, @person.state, @person.zip]]
     end
     def line_items
       move_down 10

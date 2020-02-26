@@ -19,7 +19,7 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= person.name.titleize %></td>
+            <td><%= link_to person.name.titleize, person %></td>
             <td><%= person.phone %></td>
             <td><%= person.created_at.strftime("%m/%d/%Y")%></td>
             <% if current_user  && current_user.admin? %>
