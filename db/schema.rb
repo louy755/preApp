@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_24_233522) do
+ActiveRecord::Schema.define(version: 2020_02_26_074013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delivers", force: :cascade do |t|
+    t.decimal "delivery", default: "0.0"
+    t.decimal "fee", default: "0.0"
+    t.decimal "discount", default: "0.0"
+    t.date "delivery_date"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_delivers_on_person_id"
+  end
+
+  create_table "goods", force: :cascade do |t|
+    t.integer "qnt", default: 0
+    t.string "item"
+    t.decimal "price", default: "0.0"
+    t.text "description"
+    t.string "vendor"
+    t.decimal "subtotal", default: "0.0"
+    t.decimal "tax", default: "0.0"
+    t.decimal "cost", default: "0.0"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_goods_on_person_id"
+  end
+
+  create_table "pays", force: :cascade do |t|
+    t.string "method"
+    t.decimal "amount", default: "0.0"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_pays_on_person_id"
+  end
 
   create_table "people", force: :cascade do |t|
     t.string "name"
@@ -24,14 +59,20 @@ ActiveRecord::Schema.define(version: 2020_02_24_233522) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.boolean "full_payment"
-    t.decimal "subtotal"
-    t.decimal "tax"
-    t.decimal "total"
+    t.decimal "subtotal", default: "0.0"
+    t.decimal "tax", default: "0.0"
+    t.decimal "total", default: "0.0"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "sale_rep"
+    t.decimal "profit", default: "0.0"
+    t.decimal "margin", default: "0.0"
+    t.decimal "cost", default: "0.0"
+    t.decimal "delivery_fee", default: "0.0"
+    t.decimal "fee", default: "0.0"
+    t.decimal "discount", default: "0.0"
+    t.boolean "finance", default: false
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
@@ -48,10 +89,14 @@ ActiveRecord::Schema.define(version: 2020_02_24_233522) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "delivers", "people"
+  add_foreign_key "goods", "people"
+  add_foreign_key "pays", "people"
   add_foreign_key "people", "users"
 end

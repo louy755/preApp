@@ -11,6 +11,10 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'devise'
+gem 'prawn'
+gem 'prawn-table'
+gem "chartkick"
+gem 'groupdate'
 
 
 gem 'bootsnap', '>= 1.4.2', require: false

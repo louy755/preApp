@@ -1,15 +1,29 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
-  # GET /people
-  # GET /people.json
-  def index
+  def more
     @people = Person.all
+    @goods = Good.all
+    @pays = Pay.all
+    @delivers = Deliver.all
+  end
+  def index
+    @people = Person.all.order("created_at DESC")
+    @goods = Good.all
+    @pays = Pay.all
+    @delivers = Deliver.all
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
+    respond_to do |format|
+    format.html
+      format.pdf do
+        pdf = InvoicePdf.new(@person, view_context)
+        send_data pdf.render, filename: "invoice_#{@person.phone}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /people/new
@@ -69,7 +83,7 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:name, :phone, :email, :address, :address2, :city, 
-      :state, :zip, :full_payment, :subtotal, :tax, :total, :user_id, :sale_rep)
+      params.require(:person).permit(:name, :phone, :email, :address, :address2, :city,
+      :state, :zip, :finance, :subtotal, :tax, :total, :user_id, :sale_rep, :cost)
     end
 end

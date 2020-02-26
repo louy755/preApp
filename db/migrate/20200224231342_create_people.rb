@@ -10,9 +10,9 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :state
       t.string :zip
       t.boolean :full_payment
-      t.decimal :subtotal
-      t.decimal :tax
-      t.decimal :total
+      t.decimal :subtotal, default: "0.0"
+      t.decimal :tax, default: "0.0"
+      t.decimal :total, default: "0.0"
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

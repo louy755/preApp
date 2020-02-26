@@ -7,20 +7,26 @@
         <tr>
           <th>Name</th>
           <th>Phone</th>
-          <th>Action</th> 
-          <th>Action</th>
-          <th>Action</th>
+          <th>Date</th>
+          <% if current_user  && current_user.admin? %>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+          <% end %>
         </tr>
       </thead>
 
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= person.name %></td>
+            <td><%= person.name.titleize %></td>
             <td><%= person.phone %></td>
-            <td><%= link_to 'Show', person %></td>
-            <td><%= link_to 'Edit', edit_person_path(person) %></td>
-            <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= person.created_at.strftime("%m/%d/%Y")%></td>
+            <% if current_user  && current_user.admin? %>
+              <td><%= link_to 'Show', person %></td>
+              <td><%= link_to 'Edit', edit_person_path(person) %></td>
+              <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
